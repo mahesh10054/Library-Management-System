@@ -27,7 +27,7 @@ public class AuthorController {
     {
         return authorService.getAllAuthorNames();
     }
-    git init
+
     @GetMapping("/getAuthor/{authorId}")
     public ResponseEntity getAuthor(@PathVariable Integer authorId)
     {
