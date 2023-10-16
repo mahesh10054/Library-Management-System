@@ -2,45 +2,43 @@ package com.example.Library.Management.System.Service;
 
 import com.example.Library.Management.System.Entities.Author;
 import com.example.Library.Management.System.Entities.Book;
+import com.example.Library.Management.System.Exceptions.AuthorNotFoundException;
 import com.example.Library.Management.System.Repository.AuthorRepository;
+import com.example.Library.Management.System.Repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class AuthorService {
-
+public class BookService {
+    @Autowired
+    BookRepository bookRepository;
     @Autowired
     AuthorRepository authorRepository;
-    public String addAuthor(Author author) {
-        authorRepository.save(author);
-        return "Author Added Successfully On DB";
-    }
 
-    public List<String> getAllAuthorNames() {
-        List<Author> authors = authorRepository.findAll();
-
-        List<String> result = new ArrayList<>();
-        for(Author author : authors)
-        {
-            result.add(author.getName());
-        }
-        return result;
-    }
-
-    public Author getAuthor(Integer authorId) throws Exception{
+    public String addBook(Book book, Integer authorId) throws Exception
+    {
         Optional<Author> optionalAuthor = authorRepository.findById(authorId);
-
         if(!optionalAuthor.isPresent())
         {
-            throw new Exception("The id Entered is Invalid");
+            throw new AuthorNotFoundException("Author Id Enter Not Valid");
         }
+        Author author = optionalAuthor.get();
+        book.setAuthor(author);
 
-        return optionalAuthor.get();
+        author.getBookList().add(book);
+
+        //you can only save parent table chiled table auto save
+        authorRepository.save(author);
+
+        return "Book Added Successfully";
     }
+
     public List<String> getBookNameList(Integer authorId)
     {
         List<String> bookName = new ArrayList<>();

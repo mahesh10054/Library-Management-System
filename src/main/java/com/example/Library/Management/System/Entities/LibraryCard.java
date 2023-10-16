@@ -15,12 +15,14 @@ import lombok.Setter;
 @Setter
 public class LibraryCard {
     @Id//primary key of library table
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer cardNo;
     @Enumerated(value = EnumType.STRING)
     private CardStatus cardStatus;
 
+    private String nameOnCard;
     //join the two table
     @OneToOne
-    @JoinColumn
-    private Student student; //this will be act as a foreign key of the library table
+    @JoinColumn(name = "studentId") //we are connect to parent class by using mobile Number colum
+    private Student student; //this will be acts as a foreign key of the library table
 }

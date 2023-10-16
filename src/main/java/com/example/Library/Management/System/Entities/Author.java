@@ -17,7 +17,9 @@ import java.util.List;
 @AllArgsConstructor
 public class Author {
     @Id //we write for it denote a primary key
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer authorId;
+    @Column(nullable = false,unique = true)
     private String name;
     private int age;
     private double rating;
