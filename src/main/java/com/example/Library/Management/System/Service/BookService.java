@@ -2,6 +2,7 @@ package com.example.Library.Management.System.Service;
 
 import com.example.Library.Management.System.Entities.Author;
 import com.example.Library.Management.System.Entities.Book;
+import com.example.Library.Management.System.Enums.Genre;
 import com.example.Library.Management.System.Exceptions.AuthorNotFoundException;
 import com.example.Library.Management.System.Repository.AuthorRepository;
 import com.example.Library.Management.System.Repository.BookRepository;
@@ -52,4 +53,15 @@ public class BookService {
         }
         return bookName;
     }
+//    public List<String> getBooksByGenre(Genre genre)
+//    {
+//        List<Book> listBook = bookRepository.getBooksByGenre(genre);
+//
+//        List<String> listBookName = new ArrayList<>();
+//        for(Book book : listBook)
+//        {
+//            listBookName.add(book.getBookName());
+//        }
+//        return listBookName;
+//    }
 }

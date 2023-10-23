@@ -7,6 +7,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table//in case if we don't write any name then is give table name as class name
 @Getter
@@ -24,8 +27,12 @@ public class Book {
     private Genre genre;
 
     private double rating;
+    private boolean isAvailable;
     @ManyToOne
-    @JoinColumn(name = "name") //we are connect to parent class by using name colum
+    @JoinColumn(name = "Author_ID") //we are connect to parent class by using name colum
     private Author author;
 
+
+    @OneToMany(mappedBy = "book",cascade = CascadeType.ALL)
+    private List<Transaction> transactionsList = new ArrayList<>();
 }

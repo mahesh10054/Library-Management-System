@@ -1,6 +1,7 @@
 package com.example.Library.Management.System.Controller;
 
 import com.example.Library.Management.System.Entities.Book;
+import com.example.Library.Management.System.Enums.Genre;
 import com.example.Library.Management.System.Service.AuthorService;
 import com.example.Library.Management.System.Service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,5 +31,9 @@ public class BookController {
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
-
+    @GetMapping("/getBooksByName")
+    public List<String> getBooksByName(Genre genre)
+    {
+        return null;
+    }
 }
